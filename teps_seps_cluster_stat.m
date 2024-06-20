@@ -1,8 +1,14 @@
+% IMPORTANT: the dataset download from repo contains 24 subjects.
+% Each individual data structure includes: preprocessed tms-eeg data
+% stored in fieldtrip format per target per session; Leadfield matrix per session; Head model per subject.
+% Extract and save all .mat files locally before using the following script.
+
 % this script:
 % 1) load individual tms-eeg data after preprocessing
-% Note: in SMAData structure, SHAM_...from each subject is the dataset for computing SEPs
+% Note: in SMAData structure, '*SHAM_...' from is the dataset for computing SEPs
 % 2) run cluster based permuation F/t tests on teps and seps
 % 3) compute effect size
+
 %% Prepare data and save group data
 clear;
 clc;
@@ -10,9 +16,9 @@ clc;
 subjects = {'002','003', '004', '007', '009', '010', '011', '012', ...
     '013', '014', '015', '017', '018', '019', '020', '021', '022', '024', ...
     '025', '027', '028', '030', '031', '032'};
-TARG = 'SMA';
-DRUGS = {'Place', 'Scop', 'Bipe'};
-SESSION_LABELS = {'PLA', 'SCO', 'BIP'};
+TARG = 'SMA'; % tms target 'SMA', 'mPFC' and 'AG'
+DRUGS = {'Place', 'Scop', 'Bipe'}; % drugs: placebo, scopolamine, biperiden
+SESSION_LABELS = {'PLA', 'SCO', 'BIP'};  % drugs: placebo, scopolamine, biperiden
 
 % Read session and drug information
 [~, sessdrugs] = xlsread('...\SUJsessionInfo2');
